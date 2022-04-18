@@ -14,10 +14,12 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen.js';
 import OrderScreen from './screens/OrderScreen.js';
 import DashboardScreen from './screens/DashboardScreen.js';
 import ProductListScreen from './screens/ProductListScreen.js';
+import ProductEditScreen from './screens/ProductEditScreen.js';
 
 
 const routes = {
   '/': HomeScreen,
+  '/product/:id/edit': ProductEditScreen,
   '/product/:id': ProductScreen,
   '/order/:id': OrderScreen,
   '/cart/:id': CartScreen,

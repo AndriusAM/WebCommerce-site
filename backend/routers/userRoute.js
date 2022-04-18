@@ -5,7 +5,8 @@
 const express = require('express');
 const expressAsyncHandler = require('express-async-handler');
 const { generateToken, isAuth } = require('../../frontend/utils.js');
-const User = require('../models/userModel.js')
+const User = require('../models/userModel.js');
+
 const userRouter = express.Router();
 
 userRouter.get('/createadmin', expressAsyncHandler(
