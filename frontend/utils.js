@@ -58,7 +58,6 @@ const isAuth = (req, res, next) => {
         res.status(401).send({ message: 'Invalid Token' });
       } else {
         console.log('Authorised!');
-        console.log(data);
         req.user = data;
         next();
       }
