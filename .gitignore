@@ -105,3 +105,4 @@ dist
 # Uploaded image-files
 uploads/*.jpg
 uploads/*.png
+frontend/dist/
