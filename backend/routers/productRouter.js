@@ -38,8 +38,6 @@ productRouter.put(
   isAdmin, 
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
-    console.log(req.body);
-  
     const product = await Product.findById(productId);
     if (product) {
       product.name = req.body.name;

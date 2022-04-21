@@ -7,6 +7,7 @@ const config = require('./config.js');
 const userRouter = require('./routers/userRoute.js');
 const orderRouter = require('./routers/orderRouter.js');
 const productRouter = require('./routers/productRouter.js');
+const uploadRouter = require('./routers/uploadRouter.js');
 
 // import express from 'express';
 // import mongoose from 'mongoose';
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/uploads', uploadRouter);
 app.get('/api/paypal/clientId', (req, res) => {
   res.send({ clientId: config.PAYPAL_CLIENT_ID });
 });

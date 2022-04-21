@@ -1,4 +1,4 @@
-import { getProduct, updateProduct } from '../api';
+import { getProduct, updateProduct, uploadProductImage } from '../api';
 import {
   hideLoading, parseRequestUrl, showLoading, showMessage 
 } from '../utils';
@@ -29,6 +29,21 @@ const ProductEditScreen = {
           document.location.hash = '/productlist'; 
         }
       });
+    document.getElementById('image-file')
+      .addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        showLoading();
+        const data = await uploadProductImage(formData);
+        hideLoading();
+        if (data.error) {
+          showMessage(data.error);
+        } else {
+          showMessage('Image uploaded successfully.');
+          document.getElementById('image').value = data.image;
+        }
+      });
   },
   render: async () => {
     const request = parseRequestUrl();
@@ -55,6 +70,7 @@ const ProductEditScreen = {
               <li>
                 <label for="image">Image</label>
                 <input type="text" name="image" value="${product.image}" id="image" />
+                <input type="file" name="image-file" id="image-file" />
               </li>
               <li>
                 <label for="brand">Brand</label>
