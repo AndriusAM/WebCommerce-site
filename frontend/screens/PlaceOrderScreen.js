@@ -4,6 +4,7 @@ import {
   getCartItems, getPayment, getShipping, cleanCart 
 } from '../localStorage';
 import { showLoading, hideLoading, showMessage } from '../utils';
+import { apiUrl } from '../config';
 
 const convertCartToOrder = () => {
   const orderItems = getCartItems();
@@ -90,7 +91,7 @@ const PlaceOrderScreen = {
                 ${orderItems.map((item) => `
                 <li>
                       <div class="cart-image">
-                        <img src="${item.image}" alt="${item.name}" />
+                        <img src="${apiUrl}${item.image}" alt="${item.name}" />
                       </div>
                       <div class="cart-item">
                         <div>

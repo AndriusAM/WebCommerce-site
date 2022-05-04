@@ -1,6 +1,7 @@
 import { getProduct } from '../api';
 import { getCartItems, setCartItems } from '../localStorage';
 import { parseRequestUrl, rerender } from '../utils';
+import { apiUrl } from '../config';
 
 const addToCart = (item, forceUpdate = false) => {
   let cartItems = getCartItems();
@@ -69,7 +70,7 @@ const CartScreen = {
     : cartItems.map((item) => `
              <li>
              <div class="cart-image">
-              <img src="${item.image}" alt="${item.name}" />
+              <img src="${apiUrl}${item.image}" alt="${item.name}" />
              </div>
              <div class="cart-name">
              <a href="/#/product/${item.product}">

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 const bodyParser = require('body-parser');
 const data = require('./data.js');
 const config = require('./config.js');
@@ -8,16 +9,6 @@ const userRouter = require('./routers/userRoute.js');
 const orderRouter = require('./routers/orderRouter.js');
 const productRouter = require('./routers/productRouter.js');
 const uploadRouter = require('./routers/uploadRouter.js');
-
-// import express from 'express';
-// import mongoose from 'mongoose';
-// import cors from 'cors';
-// import bodyParser from 'body-parser';
-// import data from './data.js';
-// import userRouter from './routers/userRoute.js';
-// import orderRouter from './routers/orderRouter.js';
-// import config from './config.js';
-
 
 mongoose
   .connect(config.MONGODB_URL).then(() => {
@@ -36,8 +27,9 @@ app.use('/api/uploads', uploadRouter);
 app.get('/api/paypal/clientId', (req, res) => {
   res.send({ clientId: config.PAYPAL_CLIENT_ID });
 });
-app.get('/', (req, res) => {
-  res.send('Hello Andrius');
+app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
+app.get('//', (req, res) => {
+  res.send(path.join(__dirname, '/../uploads'));
 });
 
 

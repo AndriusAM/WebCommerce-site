@@ -13,6 +13,7 @@ module.exports = {
   },
   rules: {
     'import/no-relative-packages': 'off',
+    'no-alert': 'off',
     eqeqeq: 'off',
     'no-param-reassign': 'off',
     'no-return-assign': 'off',

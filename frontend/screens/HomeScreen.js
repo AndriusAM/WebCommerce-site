@@ -1,5 +1,6 @@
 import { getProducts } from '../api.js';
 import Rating from '../components/rating.js';
+import { apiUrl } from '../config.js';
 
 const HomeScreen = {
   render: async () => {
@@ -15,10 +16,10 @@ const HomeScreen = {
       <li>
       <div class="product">
           <a href="/#/product/${product._id}">
-            <img src="${product.image}" alt="${product.name}"/>
+            <img src='${apiUrl}${product.image}' alt="${product.name}"/>
           </a>
           <div class="product-name">
-            <a href="/#/product/1">
+            <a href="/#/product/${product._id}">
               ${product.name}
             </a>
           </div>

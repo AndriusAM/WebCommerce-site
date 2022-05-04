@@ -16,7 +16,7 @@ userRouter.get('/createadmin', expressAsyncHandler(
         name: 'Andrius',
         email: 'andrius.m@example.com',
         password: 'jsamazona',
-        isAdmin: false
+        isAdmin: true
       });
       const createdUser = await user.save();
       res.send(createdUser);

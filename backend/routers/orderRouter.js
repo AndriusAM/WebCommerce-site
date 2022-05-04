@@ -10,7 +10,6 @@ const Order = require('../models/OrderModel.js');
 
 const orderRouter = express.Router();
 orderRouter.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
-  console.log(req);
   const orders = await Order.find({ user: req.user._id });
   res.send(orders);
 }));
