@@ -206,6 +206,25 @@ export const createOrder = async (order) => {
     return { error: err.response ? err.response.data.message : err.message };
   }
 };
+export const deleteOrder = async (orderId) => {
+  try {
+    const { token } = getUserInfo();
+    const response = await axios({
+      url: `${apiUrl}/api/orders/${orderId}`,
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application-json',
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    if (response.statusText !== 'OK') {
+      throw new Error(response.data.message);
+    }
+    return response.data;
+  } catch (err) {
+    return { error: err.response.data.message || err.message };    
+  }
+};
 export const getOrder = async (id) => {
   try {
     const { token } = getUserInfo();
@@ -224,7 +243,25 @@ export const getOrder = async (id) => {
     return { error: error.message };
   }
 };
-
+export const getOrders = async () => {
+  try {
+    const { token } = getUserInfo();
+    const response = await axios({
+      url: `${apiUrl}/api/orders`,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application-json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.statusText !== 'OK') {
+      throw new Error(response.data.message);
+    }
+    return response.data;
+  } catch (err) {
+    return { error: err.response.data.message || error.message };
+  }
+};
 export const getMyOrders = async () => {
   try {
     const { token } = getUserInfo();

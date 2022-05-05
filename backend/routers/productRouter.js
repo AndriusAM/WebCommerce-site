@@ -22,7 +22,7 @@ productRouter.post(
       description: 'sample description',  
       category: 'sample category',  
       brand: 'sample brand',  
-      image: '/images/product-1.jpg',  
+      image: '/uploads/1650524719497.jpg',  
     });
     const createdProduct = await product.save();
     if (createdProduct) {

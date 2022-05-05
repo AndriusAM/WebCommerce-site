@@ -5,10 +5,19 @@
 
 const express = require('express');
 const expressAsyncHandler = require('express-async-handler');
-const { isAuth } = require('../../frontend/utils.js');
+const { isAuth, isAdmin } = require('../../frontend/utils.js');
 const Order = require('../models/OrderModel.js');
 
 const orderRouter = express.Router();
+orderRouter.get(
+  '/', 
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({}).populate('user');
+    res.send(orders);
+  })
+);
 orderRouter.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
   res.send(orders);
@@ -55,4 +64,18 @@ orderRouter.put('/:id/pay', isAuth, expressAsyncHandler(async (req, res) => {
     res.status(404).send({ message: 'Order Not Found' });
   }
 }));
+orderRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = Order.findById(req.params.id);
+    if (order) {
+      const deletedOrder = await order.remove();
+      res.send({ message: 'Order has been Deleted', order: deletedOrder });
+    } else {
+      res.status(404).send({ message: 'Order not found!' });
+    }
+  })
+);
 module.exports = orderRouter;
