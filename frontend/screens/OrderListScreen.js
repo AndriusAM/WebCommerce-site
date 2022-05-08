@@ -1,15 +1,15 @@
 import DashboardMenu from '../components/DashboardMenu';
-import { createOrder, deleteOrder, getOrders } from '../api';
+import { deleteOrder, getOrders } from '../api';
 import {
   hideLoading, rerender, showLoading, showMessage 
 } from '../utils';
 
 const OrderListScreen = {
-  after_render: async () => {
+  after_render: async () => {    
     const editButtons = document.getElementsByClassName('edit-button');
     Array.from(editButtons).forEach((editButton) => {
       editButton.addEventListener('click', () => {
-        document.location.hash = `/order/${editButton.id}/edit`;
+        document.location.hash = `/order/${editButton.id}`;
       });
     });
     const deleteButtons = document.getElementsByClassName('delete-button');
