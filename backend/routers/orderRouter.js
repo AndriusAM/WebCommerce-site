@@ -7,8 +7,35 @@ const express = require('express');
 const expressAsyncHandler = require('express-async-handler');
 const { isAuth, isAdmin } = require('../../frontend/utils.js');
 const Order = require('../models/OrderModel.js');
+const User = require('../models/userModel.js');
 
 const orderRouter = express.Router();
+
+orderRouter.get(
+  '/summary',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.aggregate([
+      {
+        $group: {
+          _id: null,
+          numOrders: { $sum: 1 },
+          totalSales: { $sum: '$totalPrice' },
+        },
+      },
+    ]);
+    const users = await User.aggregate([
+      {
+        $group: {
+          _id: null,
+          numUsers: { $sum: 1 },
+        },
+      },
+    ]);
+    res.send({ users, orders });
+  })  
+);
 orderRouter.get(
   '/', 
   isAuth,
@@ -94,4 +121,5 @@ orderRouter.delete(
     }
   })
 );
+
 module.exports = orderRouter;
