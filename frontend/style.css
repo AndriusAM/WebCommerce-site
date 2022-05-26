@@ -475,3 +475,10 @@ td {
 .summary-title.color3 {
   background-color: #d0e0e0;
 }
+.charts {
+  display: flex;
+  justify-content: space-between;
+}
+.charts > div {
+  flex: 1;
+}
